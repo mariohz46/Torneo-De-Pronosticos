@@ -1,0 +1,18 @@
+form{
+    width: 90%;
+    max-width: 400px;
+    margin:auto;
+    padding-top: 90px;
+}
+.font-color{
+    color: aliceblue;
+}
+
+.labelFont-color{
+    color: aliceblue;
+}
+
+.bg{
+    background-color: rgba(26, 76, 119, 0.814);
+    border: solid 4px rgba(26, 76, 119, 0.805);
+}
