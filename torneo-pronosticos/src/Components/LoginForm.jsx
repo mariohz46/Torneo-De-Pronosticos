@@ -2,24 +2,36 @@ import { useState } from "react";
 import supabase from '../Services/supabaseClient';
 import { useNavigate } from 'react-router-dom'
 import "../Styles/LoginForm.css"
-
+import { useAuth } from "../Context/AuthContext";
 
 
 function LoginForm() {
     const [correo,setCorreo] = useState('');
     const [contraseña,setContraseña] = useState('');
     const [error, setError] = useState(null);
+    const {setUsuario} = useAuth();
     const navigate = useNavigate();
 
-    const handleLogin = async () =>{
-        try {
-            const {data, error} =await supabase.auth.signInWithPassword({
-                email:correo,
-                password:contraseña
-            });
-
-            if (error) throw error ;
-            navigate('/Dashboard');
+    async function obtenerInfoUser(){
+        const {data, error} = await supabase
+            .from("usuarios")
+            .select("idusuario,nombreusuario,rol")
+            .eq("email",correo)
+            .single();
+        return data;
+        }
+        
+        const handleLogin = async () =>{
+            try {
+                const {data, error} =await supabase.auth.signInWithPassword({
+                    email:correo,
+                    password:contraseña
+                });
+                
+                if (error) throw error ;
+                const infoUsuario = await obtenerInfoUser();
+                setUsuario(infoUsuario);    
+                navigate('/tabla');
         } catch (error) {
             setError('Correo o contraseña incorrecto ');
         }
