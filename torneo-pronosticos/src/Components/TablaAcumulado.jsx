@@ -42,12 +42,13 @@ function TablaAcumulado() {
     }, []);
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-10">
+    <div className="container-fluid px-3 mt-3">
+        <div className="row">
+            <div className="col-12">
+                <div style={{overflowX: "auto"}}> {/* 👈 agrega este div */}
                     <table className="table table-striped table-hover">
                         <thead className="color-thead">
-                            <tr >
+                            <tr>
                                 <th>#</th>
                                 <th>Participante</th>
                                 <th>Partidos</th>
@@ -84,7 +85,8 @@ function TablaAcumulado() {
                 </div>
             </div>
         </div>
-    );
+    </div>
+);
 }
 
 export default TablaAcumulado;
